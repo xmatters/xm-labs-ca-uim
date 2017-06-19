@@ -1,37 +1,42 @@
-# Instructions on creating the repo
-[Create the repo](https://help.github.com/articles/create-a-repo/) using your own Github account.
-When you create don't add a README or LICENSE. This will make sure to initialize an empty repo
+# CA Unified Infrastructure Manager
 
-Open a command line and do the following. Where `MY_NEW_REPO_NAME_HERE` is the name of your github repo and `MY_NEW_REPO_URL` is the url generated when you create the new repo. 
+The xMatters probe is set to sit on your UIM message bus and listen for any message with a subject of "xmatters".
 
-```bash
-# Clone the template repo to the local file system
-git clone https://github.com/xmatters/xm-labs-template.git
-# Change the directory name to avoid confusion and then cd into it
-mv xm-labs-template MY_NEW_REPO_NAME_HERE  
-cd MY_NEW_REPO_NAME_HERE
-# We have to tell git that the place it needs to push is not where it came from
-git remote set-url origin https://MY_NEW_REPO_URL.git
-# Pust to the remote repo
-git push -u origin master
-```
+When a event with a subject of "xmatters" is found, the xmatters probe will execute the xmattersgtw.jar file and POST UIM fields over to an inbound integration in the xMatters communication pan.
 
-Then, edit all your files and drop any new ones into the `MY_NEW_REPO_NAME_HERE` directory. Once you are finished, let Travis know and he will then fork it to the xMatters account and update the necessary links in the xM Labs main page. From there if you update your repo, those changes can be merged into the xMatters account repo and everything will be kept up to date!
+The xMatters communication plan has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
 
-# Template below:
----
 
-# Product Name Goes Here
-A note about what the product is and what this integration/scriptlet is all about. Check out the sweet video [here](media/mysweetvideo.mov). 
 
 # Pre-Requisites
-* Version 453 of App XYZ
-* Account in Application ABC
+## For base integration
+* CA UIM VERSION HERE
+* xMatters Integration Agent - Download [here](https://support.xmatters.com/hc/en-us/articles/201463419-Integration-Agent-for-xMatters-5-x-xMatters-On-Demand)
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
+## For customizing the integration
+* [Java SE Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Eclipse IDE for Java Developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/neon3)
+* [Winzip](http://www.winzip.com/), [Unarchiver](http://unarchiver.c3.cx/unarchiver), or another application capable of extracting a Jar File.
+* [UIM Help Documents](https://docops.ca.com/ca-unified-infrastructure-management/8-5-1/en)
+* [UIM Probes Help Documents](https://docops.ca.com/ca-unified-infrastructure-management-probes/ga/en)
+
+
 # Files
-* [FileA.js](FileA.js) - The javascript file to be pasted into a Shared Library. It generally does xyz. 
-* [MySweetCommPlan.zip](MySweetCommPlan.zip) - The comm plan (if needed) that has all the coold scripts and email format and such. 
+* [xmattersgtw_1.14.zip](xmattersgtw_1.14.zip) - xMatters UIM Probe 
+* [xmattersgtw-Eclise-Archive.zip](xmattersgtw-Eclise-Archive.zip) - xMatters Eclipse Project
+* [UIMNimsoft-xMatters-Comm-Plan.zip](UIMNimsoft-xMatters-Comm-Plan.zip) - xMatters UIM Nimsoft Communication Plan
+* [UIM-xMatters-Integration-Service.zip](UIM-xMatters-Integration-Service.zip) - UIM Integration Service for Integration Agent
+
+
+
+# How it works
+The xMatters probe is set to sit on your UIM message bus and listen for any message with a subject of "xmatters".
+
+When a event with a subject of "xmatters" is found, the xmatters probe will execute the xmattersgtw.jar file and POST UIM fields over to an inbound integration in the xMatters communication pan.
+
+The xMatters communication plan has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
+
 
 # Installation
 Details of the installation go here. 
