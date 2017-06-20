@@ -246,7 +246,7 @@ else {
 return response;
 ```
 
-## Set up UIM Integration Service in the IA
+## Set up Integration Agent
 
 ### Add UIM Integration Service to Integration Agent
 
@@ -274,14 +274,13 @@ The directory structure should become: `<IA-Home>\integrationservices\applicatio
 
 
 
-## Add new Integration Service reference to the Integration Agent
+### Add new Integration Service reference
 
-Navigate to the directory <IA-Home>\conf\
+1. Navigate to the directory `<IA-Home>\conf\`
+2. Open `IAConfig.xml`
+3. Scroll down to around line 330 and look for the code:
 
-Open IAConfig.xml
-
-Scroll down to around line 330 and look for the code:
-
+```xml
 <service-configs dir="../integrationservices">
   <!--
 | 0 or more paths (relative to <services-configs>/@dir), that refer to
@@ -293,19 +292,173 @@ Scroll down to around line 330 and look for the code:
 |
 | NOTE: Depending on the OS, paths may be case-sensitive.
 -->
+```
 
-Add the following path just before </service-configs>:
-
-<path>applications/uim/uim.xml</path>
-
-
-Save IAConfig.xml
-
-Close  IAConfig.xml
+4. Add the following path just before `</service-configs>`:
+`<path>applications/uim/uim.xml</path>`
+5. Save `IAConfig.xml`
+6. Close `IAConfig.xml`
 
 
+## Set up xMatters
+
+###  Add new Event Domain to xMatters instance
+
+1. Login to xMatters instance with a user that has company supervisor role.
+2. Go to Developer Tab 
+3. Click on Event Domains
+
+<kbd>
+	<img src="25_event_domains.png">
+</kbd>
+
+4. Click on the Event Domain with the name `applications`.
+
+<kbd>
+	<img src="26_applications_domain.png">
+</kbd>
+
+5. Click Add New beside the INTEGRATION SERVICES SECTION at the bottom of the page. *Note* there may already be another integration service installed. 
+
+<kbd>
+	<img src="27_new_integration_service.png">
+</kbd>
+
+6. Give the new Integration Service the name: `uim`. Add a description if you would like. Do not fill in a path.
+
+<kbd>
+	<img src="28_name.png">
+</kbd>
+
+7. Click Save button. 
 
 
+## Test that the new Integration Service is Working
+
+### Integration Agent
+
+1. Open a new Command Prompt window as an Administrator.
+2. Change to the `<IA-Home>\bin` directory
+3. Stop the integration agent using the following command:
+`stop_service`
+4. Start the integration agent using the following command:
+`start_service`
+5. After the Integration Agent has successfully started run the following command:
+`iadmin get-status`
+6. Scroll through the command window and ensure uim application has status ACTIVE.
+```
+Name: uim
+Clients: [APCLIENT, MG]
+URL: http://hostnamehere:8081/applications_uim
+Started: May 12, 2017 9:07:30 AM
+Last request: none
+Status: ACTIVE
+Pending request count: 0
+Normal priority inbound APXML queue size: 0
+High priority inbound APXML queue size: 0
+Normal priority outbound APXML queue size: 0
+High priority outbound APXML queue size: 0
+```
+
+### xMatters Web UI
+1. Login to your xMatters instance.
+2. Navigate to the Developer Tab.
+3. Click on Event Domains.
+4. Click on the event domain named applications
+5. Look at INTEGRATION SERVICES section and ensure the status of uim is *Active*
+
+### Dealing with Errors
+If uim has Status: ERROR you will need to trouble shoot the problem.
+
+1. Open the following file: 
+`<IA-Home>\log\AlarmPoint.txt`
+2. Search for uim
+3. Read the log to find out where the error is
+4. Correct the error
+
+
+## Configure xMatters UIM Communication Plan
+
+Download the comm plan: [UIMNimsoft-xMatters-Comm-Plan.zip](UIMNimsoft-xMatters-Comm-Plan.zip)
+
+### Create an xMatters API user
+
+1. Login to your xMatters instance.
+2. Click on USERS tab.
+3. Click Add button.
+4. Create a new user. This user will have permission to make xMaters Web Service calls and will be the user that authenticates into xMatters from UIM.
+User ID: uim_api
+Roles: REST Web Services User
+
+<kbd> 
+	<img src="29_rest_user.png">
+</kbd>
+
+6. Click Add. 
+
+### Install xMatters UIM Communication Plan
+
+1. Login to your xMatters instance.
+2. Navigate to the Developer Tab.
+3. Click Import Plan.
+
+<kbd>
+	<img src="30_import_comm_plan.png">
+</kbd>
+
+4. Choose File: UIMNimsoft-xMatters-Comm-Plan.zip.
+5. Click Import Plan.
+6. Ensure the Plan is Enabled.
+7. Click Edit -> Access Permissions. Check Accessible by All. 
+
+<kbd>
+	<img src="31_accessible_by_all.png">
+</kbd>
+
+8. On the UIM - Nimsoft Communication Plan click Edit -> Forms
+9. Ensure Web Service Only is checked / enabled. 
+10. Click Web Service Only -> Sender Permissions.
+11. Add `uim_api` user to have sender permission. (Created above)
+
+<kbd>
+	<img src="32_form_sender.png">
+</kbd>
+
+### Configure Integration Builder Settings
+
+1. Click on Integration Builder tab
+2. Click Edit Endpoints button
+3. Assign the uim_api user to the xMatters Endpoint and Save Changes.
+
+<kbd>
+	<img src="33_assign_endpoint.png">
+</kbd>
+
+4. Expand the Inbound Integrations by clicking on 1 Configured 
+5. Click on `UIM - Inbound`
+6. Copy the Inbound Integration url at the bottom of the page. 
+
+<kbd>
+	<img src="34_inbound_url.png">
+</kbd>
+
+7. Configure the UIM Probe according to instructions found [here](#configuring-the-xmattersgtw-probe).
+  * The Inbound Integration url from the previous step is used for the xmattersurl.
+  * The credentials for the uim_api user are used for cmattersuser and xmattespassword.
+8. Check the configuration of each of the outbound integrations.
+9. Expand the Outbound Integrations by clicking on 2 Configured.
+10. Click Event Status.
+11. Ensure that Step 5: Select integration service has uim selected.
+12. Enter the Integration Agent Name.
+  1. If you are not sure of the Integration Agent Name:
+  2. Click on Agents in the left had menu.
+  3. Click on INSTALLED
+  4. Copy the name of the installed Integration Agent that you want to target.
+
+  <kbd>
+  	<img src="35_installed_agents.png">
+  </kbd>
+13. Repeat these for Outbound Integration: Response. *Note*: Make sure to use the same agent for both outbound integrations
 
 
 
