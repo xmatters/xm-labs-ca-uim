@@ -140,7 +140,7 @@ There are two ways to deploy a probe.
 4. Click OK. A View Distribution Progress dialog box appears with detailed information about the distribution. *Note*: You can minimize this dialog box and continue working in Infrastructure Manager without interfering with the distribution.
 
 <kbd>
-	<img src="20_progress_dialog.png">
+	<img src="media/20_progress_dialog.png">
 </kbd>
 
 5. Click the Close Dialog button after distribution is finished. 
@@ -152,7 +152,7 @@ There are two ways to deploy a probe.
 2. Right click on xmattersgtw probe and go to Raw Configure...
 
 <kbd>
-	<img src="21_raw_configure.png">
+	<img src="media/21_raw_configure.png">
 </kbd>
 
 3. Set the following values:
@@ -181,7 +181,7 @@ The Nimsoft Alarm Server processes all alarms.
 2. Locate the probe named nas (Nimsoft Alarm Server)
 
 <kbd>
-	<img src="22_nas.png">
+	<img src="media/22_nas.png">
 </kbd>
 
 3. Double click on the nas probe.
@@ -189,7 +189,7 @@ The Nimsoft Alarm Server processes all alarms.
 5. Right click anywhere in the list and go to New.
 
 <kbd>
-	<img src="23_new.png">
+	<img src="media/23_new.png">
 </kbd>
 
 6. Configure the New Profile as follows:
@@ -203,7 +203,7 @@ The Nimsoft Alarm Server processes all alarms.
 For more information go [here](https://docops.ca.com/ca-unified-infrastructure-management-probes/ga/en/alphabetical-probe-articles/nas-alarm-server/nas-versions-4-4-4-7/v4-6-nas-im-configuration/the-auto-operator-tab-v4-6#TheAuto-OperatorTabv4.6-ProfileAdvanced).
 
 <kbd>
-	<img src="24_repost.png">
+	<img src="media/24_repost.png">
 </kbd>
 
 
@@ -309,25 +309,25 @@ The directory structure should become: `<IA-Home>\integrationservices\applicatio
 3. Click on Event Domains
 
 <kbd>
-	<img src="25_event_domains.png">
+	<img src="media/25_event_domains.png">
 </kbd>
 
 4. Click on the Event Domain with the name `applications`.
 
 <kbd>
-	<img src="26_applications_domain.png">
+	<img src="media/26_applications_domain.png">
 </kbd>
 
 5. Click Add New beside the INTEGRATION SERVICES SECTION at the bottom of the page. *Note* there may already be another integration service installed. 
 
 <kbd>
-	<img src="27_new_integration_service.png">
+	<img src="media/27_new_integration_service.png">
 </kbd>
 
 6. Give the new Integration Service the name: `uim`. Add a description if you would like. Do not fill in a path.
 
 <kbd>
-	<img src="28_name.png">
+	<img src="media/28_name.png">
 </kbd>
 
 7. Click Save button. 
@@ -391,7 +391,7 @@ User ID: uim_api
 Roles: REST Web Services User
 
 <kbd> 
-	<img src="29_rest_user.png">
+	<img src="media/29_rest_user.png">
 </kbd>
 
 6. Click Add. 
@@ -403,7 +403,7 @@ Roles: REST Web Services User
 3. Click Import Plan.
 
 <kbd>
-	<img src="30_import_comm_plan.png">
+	<img src="media/30_import_comm_plan.png">
 </kbd>
 
 4. Choose File: UIMNimsoft-xMatters-Comm-Plan.zip.
@@ -412,7 +412,7 @@ Roles: REST Web Services User
 7. Click Edit -> Access Permissions. Check Accessible by All. 
 
 <kbd>
-	<img src="31_accessible_by_all.png">
+	<img src="media/31_accessible_by_all.png">
 </kbd>
 
 8. On the UIM - Nimsoft Communication Plan click Edit -> Forms
@@ -421,7 +421,7 @@ Roles: REST Web Services User
 11. Add `uim_api` user to have sender permission. (Created above)
 
 <kbd>
-	<img src="32_form_sender.png">
+	<img src="media/32_form_sender.png">
 </kbd>
 
 ### Configure Integration Builder Settings
@@ -431,7 +431,7 @@ Roles: REST Web Services User
 3. Assign the uim_api user to the xMatters Endpoint and Save Changes.
 
 <kbd>
-	<img src="33_assign_endpoint.png">
+	<img src="media/33_assign_endpoint.png">
 </kbd>
 
 4. Expand the Inbound Integrations by clicking on 1 Configured 
@@ -439,7 +439,7 @@ Roles: REST Web Services User
 6. Copy the Inbound Integration url at the bottom of the page. 
 
 <kbd>
-	<img src="34_inbound_url.png">
+	<img src="media/34_inbound_url.png">
 </kbd>
 
 7. Configure the UIM Probe according to instructions found [here](#configuring-the-xmattersgtw-probe).
@@ -456,7 +456,7 @@ Roles: REST Web Services User
   4. Copy the name of the installed Integration Agent that you want to target.
 
   <kbd>
-  	<img src="35_installed_agents.png">
+  	<img src="media/35_installed_agents.png">
   </kbd>
 13. Repeat these for Outbound Integration: Response. *Note*: Make sure to use the same agent for both outbound integrations
 
@@ -599,7 +599,7 @@ If you have made a change to a java file, you will need to create a new Jar file
 -[x] Export class files with compile warnings
 
 <kbd>
-	<img src="11_more_options.png">
+	<img src="media/11_more_options.png">
 </kbd>
 
 11. Click Next >. *Do not click finish!*
