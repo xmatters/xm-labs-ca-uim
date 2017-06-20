@@ -9,12 +9,13 @@ The xMatters communication plan has outbound integration for Event Status and Re
 
 
 # Pre-Requisites
-## For base integration
+## For the integration
 * Nimsoft UIM version 8.4
 * xMatters Integration Agent - Download [here](https://support.xmatters.com/hc/en-us/articles/201463419-Integration-Agent-for-xMatters-5-x-xMatters-On-Demand)
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 ## For customizing the integration
+See [here](#import-eclipse-project) for instructions. 
 * [Java SE Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Eclipse IDE for Java Developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/neon3)
 * [Winzip](http://www.winzip.com/), [Unarchiver](http://unarchiver.c3.cx/unarchiver), or another application capable of extracting a Jar File.
@@ -66,7 +67,7 @@ The out of the Box properties that UIM will send to xMatters are as follows:
 
 
 # Installation
-These are instructions for installing the base integration. For details on customizing the integration, see [below]()
+These are instructions for installing the base integration. For details on customizing the integration, see [below](#import-eclipse-project)
 
 ## UIM Setup
 ### Add xmattersgtw_1.14.zip to the archive
@@ -195,8 +196,11 @@ The Nimsoft Alarm Server processes all alarms.
 6. Configure the New Profile as follows:
 
 *Action Type*: repost
+
 *Subject*: xmatters (must be all lowercase)
+
 *Action mode*: On message arrival (or at another interval if your use case requires)
+
 *Matching Criteria*: Set your criteria for what messages you want to create a repost on and send to xMatters. Remember the xMatters probe is looking for this repost and when it finds it, the event will be sent to xMatters.
 
 
@@ -220,11 +224,11 @@ Once you have  installed the xMatters Integration Agent and it is successfully c
 
 ```javascript
 var response = {};
-      response.status = resp.getStatusLine().getStatusCode();
-      response.body = XMIO.http.getResponseAsString(resp);
-      XMIO.http.releaseConnection(resp);
-      IALOG.info("\t\tReceived response code: {0} and payload: {1}", response.status,  response.body);
-      return response;
+response.status = resp.getStatusLine().getStatusCode();
+response.body = XMIO.http.getResponseAsString(resp);
+XMIO.http.releaseConnection(resp);
+IALOG.info("\t\tReceived response code: {0} and payload: {1}", response.status,  response.body);
+return response;
 ```
 
 
@@ -246,9 +250,9 @@ else {
 return response;
 ```
 
-## Set up Integration Agent
+## Configure the Integration Agent
 
-### Add UIM Integration Service to Integration Agent
+### Add UIM Integration Service to the Agent
 
 Extract the contents of UIM-xMatters-Event-Domain.zip into the following Integration Agent Directory.
 
@@ -261,15 +265,15 @@ The directory structure should become: `<IA-Home>\integrationservices\applicatio
 1. Navigate to the directory `<IA-Home>\integrationservices\applications\uim`
 2. Open `configuration.js`
 3. Edit the following lines. These lines are part of the UIM Put API path in uim.js file.
-  1. *Line 15*: `UIM_PROTOCOL = "http";`
-  2. *Line 16*: `UIM_SERVER = "amdc1pxm02";`
-  3. The following is the default path for UIM Put API:
-  `UIM_PROTOCOL + "://" + UIM_SERVER + "/rest/alarms/" + msg.additionalTokens.alarmID + "/assign/"`
+*Line 15*: `UIM_PROTOCOL = "http";`
+*Line 16*: `UIM_SERVER = "amdc1pxm02";`
+The following is the default path for UIM Put API:
+`UIM_PROTOCOL + "://" + UIM_SERVER + "/rest/alarms/" + msg.additionalTokens.alarmID + "/assign/"`
 4. And these lines. These are for Authenticating the Put API into UIM system. 
-  1. *Line 19*: `UIM_USER = "xmatters";`
-  2. *Line 20*: `UIM_SERVER = "password";`
-  3. A user in UIM must exist with the user ID and password set in these lines. 
-  4. This user must have permission to make web service calls into UIM.
+*Line 19*: `UIM_USER = "xmatters";`
+*Line 20*: `UIM_SERVER = "password";`
+A user in UIM must exist with the user ID and password set in these lines. 
+This user must have permission to make web service calls into UIM.
 5. Save and close `configuration.js`.
 
 
@@ -460,16 +464,20 @@ Roles: REST Web Services User
   </kbd>
 13. Repeat these for Outbound Integration: Response. *Note*: Make sure to use the same agent for both outbound integrations
 
-
-
-
-
    
 # Testing
-Be specific. What should happen to make sure this code works? What would a user expect to see?
+Create an event in UIM with a subject of `xmatters`. An event will be generated in xMatters targeting the designated recipients. The recipients will receive notifications based on their device selection and can then respond. The responses will be sent back to xMatters for auditing, then along to the Integration Agent and finally the event in UIM will be updated reflecting the user's reponse. 
 
 # Troubleshooting
-Optional section for how to troubleshoot. Especially anything in the source application that an xMatters developer might not know about. 
+
+## Inbound from UIM
+
+If an event is not reaching xMatters as expected, check the UIM log to ensure the POST to xMatters was attempted. If it was attempted, check the Inbound Integration Activity Steam for any errors. 
+
+## Outbound from xMatters
+
+If a response is not being logged in UIM, check `<IA-Home>/log/AlarmPoint.txt` file for any errors. 
+
 
 # Customizing
 This section details how to make changes to the UIM Probe or to send fields to xMatters that are not part of the Out of Box UIM Probe.
@@ -535,14 +543,6 @@ xMatters_UIM -> src -> com.uim.field.xmattersgtw -> XMattersGtw.java
 <kdb>
 	<img src="media/5_Package_Explorer.png">
 </kbd>
-
-### Modifying XMattersAlarmTemplate.java
-
-?????????????
-
-### Modifying XMattersGtw.java
-
-?????????????
 
 
 ## Packaging a New Jar File
