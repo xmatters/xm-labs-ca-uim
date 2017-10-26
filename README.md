@@ -6,6 +6,14 @@ When a event with a subject of "xmatters" is found, the xmatters probe will exec
 
 The xMatters communication plan has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
 
+---------
+
+<kbd>
+  <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
+</kbd>
+
+---------
+
 
 
 # Pre-Requisites
