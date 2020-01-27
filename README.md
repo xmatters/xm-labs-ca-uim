@@ -34,7 +34,7 @@ See [here](#import-eclipse-project) for instructions.
 # Files
 * [xmattersgtw_1.14.zip](xmattersgtw_1.14.zip) - xMatters UIM Probe 
 * [xmattersgtw-Eclise-Archive.zip](xmattersgtw-Eclise-Archive.zip) - xMatters Eclipse Project
-* [UIMNimsoft-xMatters-Comm-Plan.zip](UIMNimsoft-xMatters-Comm-Plan.zip) - xMatters UIM Nimsoft Communication Plan
+* [UIMNimsoft-xMatters-Workflow.zip](UIMNimsoft-xMatters-Workflow.zip) - xMatters UIM Nimsoft Communication Plan
 * [UIM-xMatters-Integration-Service.zip](UIM-xMatters-Integration-Service.zip) - UIM Integration Service for Integration Agent
 
 
@@ -389,9 +389,9 @@ If uim has Status: ERROR you will need to trouble shoot the problem.
 4. Correct the error
 
 
-## Configure xMatters UIM Communication Plan
+## Configure xMatters UIM Workflow
 
-Download the comm plan: [UIMNimsoft-xMatters-Comm-Plan.zip](UIMNimsoft-xMatters-Comm-Plan.zip)
+Download the workflow: [UIMNimsoft-xMatters-Workflow.zip](UIMNimsoft-xMatters-Workflow.zip)
 
 ### Create an xMatters API user
 
@@ -408,26 +408,26 @@ Roles: REST Web Services User
 
 6. Click Add. 
 
-### Install xMatters UIM Communication Plan
+### Install xMatters UIM Workflow
 
 1. Login to your xMatters instance.
-2. Navigate to the Developer Tab.
-3. Click Import Plan.
+2. Navigate to the Workflows 
+3. Click Import Worflow.
 
 <kbd>
-	<img src="media/30_import_comm_plan.png">
+	<img src="media/30_import_workflow.png">
 </kbd>
 
-4. Choose File: UIMNimsoft-xMatters-Comm-Plan.zip.
-5. Click Import Plan.
+4. Choose File: UIMNimsoft-xMatters-Workflow.zip.
+5. Click Import.
 6. Ensure the Plan is Enabled.
-7. Click Edit -> Access Permissions. Check Accessible by All. 
+7. Click Edit -> Access Permissions. Check Accessible by All. Alternatively, select the REST user from above and any other developers who should have edit access. 
 
 <kbd>
 	<img src="media/31_accessible_by_all.png">
 </kbd>
 
-8. On the UIM - Nimsoft Communication Plan click Edit -> Forms
+8. On the UIM - Nimsoft Workflow click Edit -> Forms
 9. Ensure Web Service Only is checked / enabled. 
 10. Click Web Service Only -> Sender Permissions.
 11. Add `uim_api` user to have sender permission. (Created above)
