@@ -2,9 +2,9 @@
 
 The xMatters probe is set to sit on your UIM message bus and listen for any message with a subject of "xmatters".
 
-When a event with a subject of "xmatters" is found, the xmatters probe will execute the xmattersgtw.jar file and POST UIM fields over to an inbound integration in the xMatters communication pan.
+When a event with a subject of "xmatters" is found, the xmatters probe will execute the xmattersgtw.jar file and POST UIM fields over to an inbound integration in the xMatters workflow.
 
-The xMatters communication plan has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
+The xMatters workflow has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
 
 ---------
 
@@ -34,7 +34,7 @@ See [here](#import-eclipse-project) for instructions.
 # Files
 * [xmattersgtw_1.14.zip](xmattersgtw_1.14.zip) - xMatters UIM Probe 
 * [xmattersgtw-Eclise-Archive.zip](xmattersgtw-Eclise-Archive.zip) - xMatters Eclipse Project
-* [UIMNimsoft-xMatters-Workflow.zip](UIMNimsoft-xMatters-Workflow.zip) - xMatters UIM Nimsoft Communication Plan
+* [UIMNimsoft-xMatters-Workflow.zip](UIMNimsoft-xMatters-Workflow.zip) - xMatters UIM Nimsoft Workflow
 * [UIM-xMatters-Integration-Service.zip](UIM-xMatters-Integration-Service.zip) - UIM Integration Service for Integration Agent
 
 
@@ -42,9 +42,9 @@ See [here](#import-eclipse-project) for instructions.
 # How it works
 The xMatters probe is set to sit on your UIM message bus and listen for any message with a subject of "xmatters".
 
-When a event with a subject of "xmatters" is found, the xmatters probe will execute the xmattersgtw.jar file and POST UIM fields over to an inbound integration in the xMatters communication pan.
+When a event with a subject of "xmatters" is found, the xmatters probe will execute the xmattersgtw.jar file and POST UIM fields over to an inbound integration in the xMatters workflow.
 
-The xMatters communication plan has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
+The xMatters workflow has outbound integration for Event Status and Response. The outbound integration points to the xMatters Integration Agent which updates UIM tickets.
 
 ## Default UIM Fields passed to xMatters
 
@@ -166,9 +166,9 @@ There are two ways to deploy a probe.
 
 3. Set the following values:
 
-You will get the values for this step after you have configured and installed the UIM - Nimsoft xMatters Communication Plan. You will do this later in this guide and instructions can be found here. LINKME
+You will get the values for this step after you have configured and installed the UIM - Nimsoft xMatters Workflow. You will do this later in this guide and instructions can be found here. LINKME
 
-*xmattersurl* = This is the url of the Inbound Integration for the Nimsoft xMatters Communication plan. 
+*xmattersurl* = This is the url of the Inbound Integration for the Nimsoft xMatters Workflow. 
 *logfile* = xmattersftw.log
 *loglevel* = Set how detailed you want the log to be. 1 = Very few logs, 5 : The most logs, debug.
 *cmattersuser* = uim_api
